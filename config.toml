@@ -1,0 +1,17 @@
+[database]
+DB_HOST = ""
+DB_PORT = "3306"
+DB_SCHEMA_NAME = "mcs_v2"
+DB_USER_NAME = ""
+DB_PWD = ""
+DB_ARGS = ""
+
+[basevalue]
+miner_count = 0
+wallet_count = 0
+active_deals = 0
+source_file_cids = 0
+user_uploads = 0
+pinned_ipfs_size = 0
+sealed_storage = 0
+bucket_count = 0
