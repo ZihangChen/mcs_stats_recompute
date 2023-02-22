@@ -52,7 +52,7 @@ def update_bucket():
         records = session.query(MarketingStats).all()
 
         for record in records:
-           record.user_uploads = base_val['user_uploads'] \
+            record.user_uploads = base_val['user_uploads'] \
                     + session.query(SourceFileUpload).filter(SourceFileUpload.create_at<=record.updated_at).count()\
                     + session.query(OSSFile).filter(OSSFile.is_folder==False).filter(OSSFile.created_at<=datetime.fromtimestamp(record.updated_at)).count()
     finally:
