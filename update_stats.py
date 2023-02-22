@@ -43,5 +43,22 @@ def scan():
         session.commit()
         session.close()
 
+def update_bucket():
+    base_val = toml.load('config.toml')['basevalue']
+    
+    try:
+        session = get_db()
+        records = session.query(MarketingStats).all()
+
+        for record in records:
+           record.user_uploads = base_val['user_uploads'] \
+                    + session.query(SourceFileUpload).filter(SourceFileUpload.create_at<=record.updated_at).count()\
+                    + session.query(OSSFile).filter(OSSFile.is_folder==False).filter(OSSFile.created_at<=record.updated_at).count()
+    finally:
+        session.add_all(records)
+        session.commit()
+        session.close()
+
+
 if __name__ == "__main__":
-    scan()
+    update_bucket()
